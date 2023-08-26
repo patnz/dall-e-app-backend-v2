@@ -1,29 +1,30 @@
-const express = require('express');
-const morgan = require('morgan');
-const helmet = require('helmet');
-const cors = require('cors');
+const express = require('express')
+const morgan = require('morgan')
+const helmet = require('helmet')
+const cors = require('cors')
 
-require('dotenv').config();
+const postRoutes = require('./api/postRoutes')
+const dalleRoutes = require('./api/dalleRoutes')
 
-const middlewares = require('./middlewares');
-const api = require('./api');
+require('dotenv').config()
 
-const app = express();
+const middlewares = require('./middlewares')
 
-app.use(morgan('dev'));
-app.use(helmet());
-app.use(cors());
-app.use(express.json());
+const app = express()
 
-app.get('/', (req, res) => {
-  res.json({
-    message: '🦄🌈✨👋🌎🌍🌏✨🌈🦄',
-  });
-});
+app.use(morgan('dev'))
+app.use(helmet())
+app.use(cors())
+app.use(express.json({ limit: '50mb' }))
 
-app.use('/api/v1', api);
+app.get('/', async (req, res) => {
+  res.send('Hello from DALL-E!')
+})
 
-app.use(middlewares.notFound);
-app.use(middlewares.errorHandler);
+app.use('/api/v1/post', postRoutes)
+app.use('/api/v1/dalle', dalleRoutes)
 
-module.exports = app;
+app.use(middlewares.notFound)
+app.use(middlewares.errorHandler)
+
+module.exports = app
