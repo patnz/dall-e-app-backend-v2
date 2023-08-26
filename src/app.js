@@ -3,8 +3,8 @@ const morgan = require('morgan')
 const helmet = require('helmet')
 const cors = require('cors')
 
-const postRoutes = require('./api/postRoutes')
-const dalleRoutes = require('./api/dalleRoutes')
+const postRoutes = require('../api/postRoutes')
+const dalleRoutes = require('../api/dalleRoutes')
 
 require('dotenv').config()
 

@@ -1,6 +1,6 @@
 const express = require('express')
 const cloudinary = require('cloudinary').v2
-const Post = require('../mongodb/models/post')
+const Post = require('../src/mongodb/models/post')
 
 require('dotenv').config()
 
